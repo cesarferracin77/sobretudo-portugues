@@ -1,28 +1,33 @@
 <div class="article article-list-item">
     <div class="article-cover">
-        <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="Temporário">
+        <a href="{% url 'articles:article'  article.id  %}">
+            <img src="{{ article.cover.url }}" alt="Temporário">
+        </a>
     </div>
     <div class="article-title-container">
-        <h2 class="article-title">Lorem ipsum dolor sit amet.</h2>
+        <h2 class="article-title">
+            <a href="{% url 'articles:article'  article.id  %}">
+                {{ article.title }}</h2>
+            </a>
     </div>
     <div class="article-author">
         <span class="article-author-item">
             <i class="fas fa-user"></i>
-                Cesar Ferracin
+            {{ article.author.first_name }} {{ article.author.last_name }}
         </span>
         <span class="article-author-item">
             <i class="fas fa-calendar-alt"></i>
-                11/04/2022 às 16:29
+            {{ article.created_at|date:"d/m/Y" }} às {{ article.created_at|date:"H:i:s" }}
         </span>
         <span class="article-author-item">
             <a href="/articles/category/gramatica/">
                 <i class="fas fa-layer-group"></i>
-                <span class="">Gramática</span>
+                <span class="">{{ article.category.name }}</span>
             </a>
         </span>                    
     </div>
     <div class="article-content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, inventore nihil vitae laborum corporis quo delectus pariatur suscipit dolorum blanditiis voluptatibus aliquam qui praesentium doloremque cupiditate magni ullam exercitationem laboriosam?</p>
+        <p>{{ article.description }}</p>
     </div>
 
     <div class="article-meta-container">
@@ -31,20 +36,27 @@
                 <i class="fas fa-stopwatch"></i>
                 Dificuldade
             </h3>
-            <div class="article-meta-text">Fácil</div>
+            <div class="article-meta-text">{{ article.difficulty_description }}</div>
         </div>
         <div class="article-meta article-subject">
             <h3 class="article-meta-title">
                 <i class="fas fa-stopwatch"></i>
                 Assunto
             </h3>
-            <div class="article-meta-text">Curiosidades</div>
+            <div class="article-meta-text">{{ article.about }}</div>
         </div>                   
-    </div>         
+    </div>     
+    {% if is_detail_page is not True %}    
     <footer class="article-footer">
-        <a href="/articles/category/gramatica/" class="article-read-more button button-dark button-full-width">
+        <a href="{% url 'articles:article'  article.id  %}" class="article-read-more button button-dark button-full-width">
             <i class="fas fa-eye"></i>
             <span>ver mais...</span>
         </a>
-    </footer>                    
+    </footer>        
+    {% endif %}     
+    {% if is_detail_page is True %}    
+    <div class="article-text">
+        {{ article.text | linebreaksbr }}
+    </div>       
+    {% endif %}                
 </div>

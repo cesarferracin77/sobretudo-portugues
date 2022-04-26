@@ -1,18 +1,11 @@
-{% include 'artigos/partials/head.html' %}
-<body>
-    {% include 'artigos/partials/header.html' %}
-    {% include 'artigos/partials/search.html' %}
+{% extends 'global/base.html' %}
 
-   <main class="main-content-container">
-        <div class="main-content main-content-list container">
-            {% include 'artigos/partials/article.html' %}
-            {% include 'artigos/partials/article.html' %}
-            {% include 'artigos/partials/article.html' %}
-            {% include 'artigos/partials/article.html' %}
-            {% include 'artigos/partials/article.html' %}
-            {% include 'artigos/partials/article.html' %}            
-        </div>
-   </main>
-   {% include 'artigos/partials/footer.html' %}
-</body>
-</html>
+{% block title %}Home | {% endblock title %}
+
+{% block content %}
+<div class="main-content main-content-list container">
+    {% for article in articles %}
+        {% include 'artigos/partials/article.html' %}
+    {% endfor %}
+</div>
+{% endblock content %}         

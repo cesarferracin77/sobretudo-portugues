@@ -1,8 +1,12 @@
-from django.contrib import admin
 from django.urls import path
 
-from artigos.views import home
+from . import views
+
+# articles:article
+app_name = 'articles'
 
 urlpatterns = [
-    path('', home),
+    path('', views.home, name='home'),
+    path('articles/<int:id>/',
+         views.article, name='article'),
 ]
