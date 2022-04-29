@@ -11,24 +11,29 @@
             </a>
     </div>
     <div class="article-author">
-        <span class="article-author-item">
-            <i class="fas fa-user"></i>
-            {% if article.author.first_name %}
-                {{ article.author.first_name }} {{ article.author.last_name }}
-            {% else %}
-                {{ article.author.username }} 
-            {% endif %}
-        </span>
+        {% if article.author is not None %}
+            <span class="article-author-item">
+                <i class="fas fa-user"></i>
+                    {% if article.author.first_name %}
+                        {{ article.author.first_name }} {{ article.author.last_name }}
+                    {% else %}
+                        {{ article.author.username }} 
+                    {% endif %}
+            </span>
+        {% endif %}
+        
         <span class="article-author-item">
             <i class="fas fa-calendar-alt"></i>
             {{ article.created_at|date:"d/m/Y" }} às {{ article.created_at|date:"H:i:s" }}
         </span>
+    {% if article.category is not None %}
         <span class="article-author-item">
             <a href="{% url 'articles:category' article.category.id %}">
                 <i class="fas fa-layer-group"></i>
                 <span class="">{{ article.category.name }}</span>
             </a>
-        </span>                    
+        </span>   
+    {% endif %}                 
     </div>
     <div class="article-content">
         <p>{{ article.description }}</p>
