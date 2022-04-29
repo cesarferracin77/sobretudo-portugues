@@ -10,6 +10,8 @@ from artigos.models import Article
 def home(request, template_name="artigos/pages/home.html"):
     articles_db = Article.objects.filter(is_published=True).order_by('-id')
     args = {}
+    name = "Cesar Luiz Ferracin"
+    args['name'] = name
     articles = articles_db
     args['articles'] = articles
     return TemplateResponse(request, template_name, args)
@@ -20,6 +22,8 @@ def category(request, category_id, template_name="artigos/pages/category.html"):
         is_published=True
         ).order_by('-id')
     args = {}
+    name = "Cesar Luiz Ferracin"
+    args['name'] = name    
     articles = articles_db
     args['articles'] = articles
     return TemplateResponse(request, template_name, args)
