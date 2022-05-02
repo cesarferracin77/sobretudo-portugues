@@ -64,8 +64,12 @@
     </footer>        
     {% endif %}     
     {% if is_detail_page is True %}    
-    <div class="article-text">
-        {{ article.text | linebreaksbr }}
-    </div>       
+        <div class="article-text">
+        {% if article.text_is_html is True %}   
+            {{ article.text | safe }}    
+        {% else %}   
+            {{ article.text | linebreaksbr }}           
+        {% endif %}           
+        </div> 
     {% endif %}                
 </div>
