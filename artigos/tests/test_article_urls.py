@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.urls import reverse
 
 
-# Create your tests here.
 class ArticleURLsTest(TestCase):
     def test_article_home_url_is_correct(self):
         url = reverse('articles:home')

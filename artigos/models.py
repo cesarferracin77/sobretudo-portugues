@@ -9,12 +9,14 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 class Author(models.Model):
     first_name = models.CharField(max_length=65, null=True)
     last_name = models.CharField(max_length=65, null=True)
 
     def __str__(self) -> str:
         return self.first_name + self.last_name
+
 
 class Difficulty(models.Model):
     difficulty = models.CharField(max_length=65)
@@ -35,7 +37,9 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='articles/covers/%Y/%m/%d/')
+    cover = models.ImageField(
+        upload_to='articles/covers/%Y/%m/%d/', blank=True, null=True,
+        default='articles/covers/%Y/%m/%d/default_article_cover.jpg')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
