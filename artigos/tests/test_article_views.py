@@ -8,7 +8,7 @@ from .test_article_base import ArticleTestBase
 
 class ArticleViewsTest(ArticleTestBase):
 
-    """Testing Home page"""
+    """Testing Home page view"""
 
     def test_article_home_view_function_is_correct(self):
         view = resolve('/')
@@ -55,7 +55,7 @@ class ArticleViewsTest(ArticleTestBase):
             'No articles found',
             response.content.decode('utf-8'))
 
-    """Testing Category page"""
+    """Testing Category page view"""
 
     def test_article_category_view_function_is_correct(self):
         view = resolve(
@@ -89,7 +89,7 @@ class ArticleViewsTest(ArticleTestBase):
         # Decode the content to the "utf-8" standard for searchings
         self.assertEqual(response.status_code, 404)
 
-    """Testing Article Detail page"""
+    """Testing Article Detail page view"""
 
     def test_article_detail_view_function_is_correct(self):
         view = resolve(

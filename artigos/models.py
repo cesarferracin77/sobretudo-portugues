@@ -41,7 +41,8 @@ class Article(models.Model):
         upload_to='articles/covers/%Y/%m/%d/', blank=True, null=True,
         default='articles/covers/%Y/%m/%d/default_article_cover.jpg')
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+        Category, on_delete=models.SET_NULL,
+        null=True, blank=True, default=None)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     link = models.URLField(max_length=250, null=True)
 
