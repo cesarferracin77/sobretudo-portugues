@@ -6,7 +6,7 @@ from .test_article_base import Article, ArticleTestBase
 
 class ArticleModelTest(ArticleTestBase):
     def setUp(self) -> None:
-        self.article = self.make_article()
+        self.article = self.make_article(title='Article Testing')
         return super().setUp()
 
     def make_articles_no_default(self):
@@ -48,3 +48,10 @@ class ArticleModelTest(ArticleTestBase):
         article.save()
         self.assertFalse(article.is_published,
                          msg='Article is_published is not False.')
+
+    def test_article_string_representation(self):
+        self.assertEqual(
+            str(self.article),
+            self.article.title,
+            msg=f'Article str representation must be "{self.article.title}" but is "{str(self.article)}"'
+        )

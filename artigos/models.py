@@ -10,14 +10,6 @@ class Category(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    first_name = models.CharField(max_length=65, null=True)
-    last_name = models.CharField(max_length=65, null=True)
-
-    def __str__(self) -> str:
-        return self.first_name + self.last_name
-
-
 class Difficulty(models.Model):
     difficulty = models.CharField(max_length=65)
     units = models.IntegerField()
