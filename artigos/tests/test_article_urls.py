@@ -14,3 +14,7 @@ class ArticleURLsTest(TestCase):
     def test_article_detail_url_is_correct(self):
         url = reverse('articles:article', kwargs={'id': 1})
         self.assertEqual(url, '/articles/1/')
+
+    def test_article_search_url_is_correct(self):
+        url = reverse('articles:search')
+        self.assertEqual(url, '/articles/search/')

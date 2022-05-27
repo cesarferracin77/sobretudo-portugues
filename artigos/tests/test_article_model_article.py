@@ -13,7 +13,7 @@ class ArticleModelTest(ArticleTestBase):
         article = Article(
             title='Artigo Teste',
             description='Descrição do artigo teste.',
-            slug='artigo-teste',
+            slug='artigo-teste-para-nao-padrao',
             text='Este é o texto completo do artigo teste',
             link="http://www.uol.com.br",
             difficulty=self.make_difficulty(difficulty='Difícil', units=3),

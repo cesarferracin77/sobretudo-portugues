@@ -21,7 +21,7 @@ class Difficulty(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=90)
     description = models.CharField(max_length=190)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     difficulty = models.ForeignKey(
         Difficulty, on_delete=models.SET_NULL, null=True)
     text = models.TextField()

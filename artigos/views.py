@@ -1,7 +1,7 @@
-from django.http import Http404, HttpResponse
+from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.template.response import TemplateResponse
-from utils.artigos.factory import make_article
 
 from artigos.models import Article
 
@@ -36,3 +36,23 @@ def article(request, id):
     args['article'] = article
     args['is_detail_page'] = True
     return render(request, 'artigos/pages/artigo-view.html', args)
+
+
+def search(request):
+    search_term = request.GET.get('q', '').strip()
+    if not search_term:
+        raise Http404()
+
+    articles = Article.objects.filter(
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term),
+        ),
+        is_published=True
+    ).order_by('-id')
+
+    return render(request, 'artigos/pages/search.html', {
+        'page_title': f'Pesquisa por "{search_term}" |',
+        'search_term': search_term,
+        'articles': articles,
+    })
