@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
@@ -8,13 +9,15 @@ from artigos.models import Article
 
 # Create your views here.
 def home(request, template_name="artigos/pages/home.html"):
-    articles_db = Article.objects.filter(is_published=True).order_by('-id')
-    articles = articles_db
+    articles = Article.objects.filter(is_published=True).order_by('-id')
+    current_page = request.GET.get('page', 1)
+    paginator = Paginator(articles, 8)
+    page_obj = paginator.get_page(current_page)
     args = {}
     name = "Cesar Luiz Ferracin"
     args['name'] = name
-    articles = articles_db
-    args['articles'] = articles
+    args['articles'] = page_obj
+
     return TemplateResponse(request, template_name, args)
 
 
